@@ -49,24 +49,35 @@ func (h *ProductHandler) HandlePostProduct(c *fiber.Ctx) error {
 // GET: get a product with a given id
 //
 func (h *ProductHandler) HandleGetProduct(c *fiber.Ctx) error {
-	//get id from params
-
-	//read from store
-
-	//return to user
-
-	return nil
+	id := c.Params("id")
+	product, err := h.store.GetProductById(c.Context(), id)
+	if err != nil {
+		return ErrResourceNotFound("product")
+	}
+	return c.JSON(product)
 }
 
 //
 // LIST (GET MANY): list all products or list products with given filter
 //
 func (h *ProductHandler) HandleListProducts(c *fiber.Ctx) error {
-	//list all prodcuts in db
-	//maybe add filter 
-	return nil
+	//
+	//TODO: add the ability to query products by fields
+	//
+	products, err := h.store.ListProducts(c.Context(), db.Map{})
+	if err != nil {
+		return ErrResourceNotFound("products")
+	}
+	return c.JSON(products)
 }
 
+func (h *ProductHandler) HandleDeleteProduct(c *fiber.Ctx) error {
+	id := c.Params("id")
+	if err := h.store.DeleteProduct(c.Context(), id); err != nil {
+		return err
+	}
+	return c.JSON(DeleteResponse(id))
+}
 
 
 

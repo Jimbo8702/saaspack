@@ -6,7 +6,9 @@ import (
 
 func AddProductRoutes(app fiber.Router, h *ProductHandler) *fiber.Router {
 	app.Post("/products", h.HandlePostProduct)
-	// app.Get("/products/:id")
+	app.Delete("/products/:id", h.HandleDeleteProduct)
+	app.Get("/products", h.HandleListProducts)
+	app.Get("/products/:id", h.HandleGetProduct)
 	return &app
 }
 

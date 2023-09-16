@@ -16,6 +16,7 @@ type CategoryStore interface {
 	GetCategoryById(context.Context, string) (*types.Category, error)
 	ListCategories(context.Context, Map) ([]*types.Category, error) 
 	DeleteCategory(context.Context, string) error 
+	//add update
 }
 
 type MongoCategoryStore struct {
@@ -30,7 +31,7 @@ func NewMongoCategoryStore(client *mongo.Client) *MongoCategoryStore {
 	}
 }
 
-func (s MongoCategoryStore) InsertCategory(ctx context.Context, c *types.Category) (*types.Category, error) {
+func (s *MongoCategoryStore) InsertCategory(ctx context.Context, c *types.Category) (*types.Category, error) {
 	res, err := s.coll.InsertOne(ctx, c)
 	if err != nil {
 		return nil, err
@@ -39,7 +40,7 @@ func (s MongoCategoryStore) InsertCategory(ctx context.Context, c *types.Categor
 	return c, nil
 }
 
-func (s MongoCategoryStore) GetCategoryById(ctx context.Context, id string) (*types.Category, error) {
+func (s *MongoCategoryStore) GetCategoryById(ctx context.Context, id string) (*types.Category, error) {
 	oid, err := primitive.ObjectIDFromHex(id)
 	if err != nil {
 		return nil, err
@@ -51,7 +52,7 @@ func (s MongoCategoryStore) GetCategoryById(ctx context.Context, id string) (*ty
 	return &category, nil
 }
 
-func (s MongoCategoryStore) ListCategories(ctx context.Context, filter Map) ([]*types.Category, error) {
+func (s *MongoCategoryStore) ListCategories(ctx context.Context, filter Map) ([]*types.Category, error) {
 	resp, err := s.coll.Find(ctx, filter)
 	if err != nil {
 		return nil, err
@@ -63,7 +64,7 @@ func (s MongoCategoryStore) ListCategories(ctx context.Context, filter Map) ([]*
 	return categories, nil
 }
 
-func (s MongoCategoryStore) DeleteCategory(ctx context.Context, id string) error {
+func (s *MongoCategoryStore) DeleteCategory(ctx context.Context, id string) error {
 	oid, err := primitive.ObjectIDFromHex(id)
 	if err != nil {
 		return err
