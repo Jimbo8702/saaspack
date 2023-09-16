@@ -46,23 +46,29 @@ func (h *CategoryHandler) HandleGetCategory(c *fiber.Ctx) error {
 	id := c.Params("id")
 	category, err := h.store.GetCategoryById(c.Context(), id)
 	if err != nil {
+		h.logger.Log("error", "couldn't get category", id)
 		return ErrResourceNotFound("category")
 	}
+	h.logger.Log("info", "category found", id)
 	return c.JSON(category)
 }
 
 func (h *CategoryHandler) HandleListCategory(c *fiber.Ctx) error {
 	categories, err := h.store.ListCategories(c.Context(), db.Map{})
 	if err != nil {
+		h.logger.Log("error", "couldn't list categorys", nil)
 		return ErrResourceNotFound("category")
 	}
+	h.logger.Log("info", "categories found", nil)
 	return c.JSON(categories)
 }
 
 func (h *CategoryHandler) HandleDeleteCategory(c *fiber.Ctx) error {
 	id := c.Params("id")
 	if err := h.store.DeleteCategory(c.Context(), id); err != nil {
+		h.logger.Log("error", "couldn't delete category", id)
 		return err
 	}
+	h.logger.Log("info", "category deleted", id)
 	return c.JSON(DeleteResponse(id))
 }
