@@ -24,6 +24,9 @@ func NewProductHandler(s db.ProductStore, l logger.Logger, v validator.Validator
 	}
 }
 
+//
+// POST: create a product
+//
 func (h *ProductHandler) HandlePostProduct(c *fiber.Ctx) error {
 	var params types.CreateProductParams
 	if err := c.BodyParser(&params); err != nil {
@@ -40,6 +43,28 @@ func (h *ProductHandler) HandlePostProduct(c *fiber.Ctx) error {
 	}
 	h.logger.Log("info", "product created", product.ID)
 	return c.JSON(insertedProduct)
+}
+
+//
+// GET: get a product with a given id
+//
+func (h *ProductHandler) HandleGetProduct(c *fiber.Ctx) error {
+	//get id from params
+
+	//read from store
+
+	//return to user
+
+	return nil
+}
+
+//
+// LIST (GET MANY): list all products or list products with given filter
+//
+func (h *ProductHandler) HandleListProducts(c *fiber.Ctx) error {
+	//list all prodcuts in db
+	//maybe add filter 
+	return nil
 }
 
 

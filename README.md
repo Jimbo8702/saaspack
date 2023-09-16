@@ -66,4 +66,25 @@ what do i want to do?
 
 -- need an admin dashboard
 -- need a userfacing dashboard
+
 # saaspack
+
+user ==> apply for reservations for products
+auth_user => subscription service => higher priority, quick book with saving account information
+equifile (credit cards) => verify ids, documents, ..etc
+non auth can see products => but to book need to sign in
+auto invoice customer when reservation approved
+
+admin
+
+- customer page
+  - customers - most recent by, next monthly payment, pending and fulfilled invoices, location
+- reservation page
+  - all reservation requests sorted by product category or location
+- product page
+  - view all products, metadata about products, add a product, add a category, delist product, update products
+- employee page
+  - simple employee management, names, emails, role, access,
+- payments
+  - all processed payments, pending or not, total for the week/month/year, invoices, awaiting payouts
+- document page ==> storing documents for products, users, etc (anything needed to be stored)

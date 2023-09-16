@@ -13,5 +13,5 @@ func NewFMTLogger() *FMTLogger {
 }
 
 func (fl *FMTLogger) Log(l, m string, d any) {
-	fmt.Printf("level=%s message=%s data=%d", l, m, d)
+	fmt.Printf("level=%s message=%s data=%d\n", l, m, d)
 }

@@ -2,6 +2,9 @@ package types
 
 import "time"
 
+// booking can be make but is started as unfulfilled
+//the booking then goes to the admin dashboard
+
 type Booking struct {
 	ID 			string    `bson:"id"         json:"id"`
 	UserID 		string 	  `bson:"useriD"     json:"userID"`

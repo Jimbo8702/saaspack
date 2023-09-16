@@ -27,15 +27,18 @@ func main() {
 	}
 
 	var (
-		logger         = logger.NewFMTLogger()
-		validator      = validator.NewPlaygroundValidator("params")
-		productStore   = db.NewMongoProductStore(client)
-		productHandler = api.NewProductHandler(productStore, logger, validator)
-		app 		   = fiber.New(config)
-		apiv1 		   = app.Group("api/v1")
+		logger          = logger.NewFMTLogger()
+		validator       = validator.NewPlaygroundValidator("params")
+		productStore    = db.NewMongoProductStore(client)
+		categoryStore   = db.NewMongoCategoryStore(client)
+		productHandler  = api.NewProductHandler(productStore, logger, validator)
+		categoryHandler = api.NewCategoryHandler(categoryStore, logger, validator)
+		app 		    = fiber.New(config)
+		apiv1 		    = app.Group("api/v1")
 	)
 	
 	api.AddProductRoutes(apiv1,  productHandler)
+	api.AddCategoryRoutes(apiv1, categoryHandler)
 
 	listenAddr := os.Getenv("HTTP_LISTEN_ADDRESS")
 	app.Listen(listenAddr)
