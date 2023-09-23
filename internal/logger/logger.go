@@ -5,6 +5,7 @@ import "fmt"
 type Logger interface {
 	Log(level string, message string, data any)
 }
+// add a switch to get the datatype and then printf with the correct type
 
 type FMTLogger struct {}
 

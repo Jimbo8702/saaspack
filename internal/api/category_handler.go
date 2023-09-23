@@ -38,7 +38,7 @@ func (h *CategoryHandler) HandlePostCategory(c *fiber.Ctx) error {
 	if err != nil {
 		return err
 	}
-	h.logger.Log("info", "category inserted", category.ID)
+	h.logger.Log("info", "category inserted", insertedCategory.ID)
 	return c.JSON(insertedCategory)
 }
 
@@ -56,7 +56,7 @@ func (h *CategoryHandler) HandleGetCategory(c *fiber.Ctx) error {
 func (h *CategoryHandler) HandleListCategory(c *fiber.Ctx) error {
 	categories, err := h.store.ListCategories(c.Context(), db.Map{})
 	if err != nil {
-		h.logger.Log("error", "couldn't list categorys", nil)
+		h.logger.Log("error", "couldn't list categories", nil)
 		return ErrResourceNotFound("category")
 	}
 	h.logger.Log("info", "categories found", nil)

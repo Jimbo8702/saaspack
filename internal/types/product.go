@@ -1,7 +1,7 @@
 package types
 
 type Category struct {
-	ID 	  string `bson:"id" json:"id"`
+	ID 	  string `bson:"id"    json:"id"`
 	Value string `bson:"value" json:"value"`
 }
 
@@ -27,16 +27,16 @@ type CreateProductParams struct {
 	Description string	 `json:"description" params:"required"`
 	Price 		string	 `json:"price"       params:"required"`
 	Deposit 	string	 `json:"deposit"     params:"required"`
-	RentPeriod 	string 	 `json:"period"      params:"required"`
+	RentPeriod 	string 	 `json:"rentPeriod"  params:"required"`
 }
 
 func NewProductFromParams(params CreateProductParams) *Product {
 	return &Product{
-		CategoryID: params.CategoryID,
-		Name: params.Name,
+		CategoryID:  params.CategoryID,
+		Name: 		 params.Name,
 		Description: params.Description,
-		Price: params.Price,
-		Deposit: params.Deposit,
-		RentPeriod: params.RentPeriod,
+		Price: 		 params.Price,
+		Deposit: 	 params.Deposit,
+		RentPeriod:  params.RentPeriod,
 	}
 }
